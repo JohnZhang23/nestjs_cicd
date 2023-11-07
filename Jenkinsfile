@@ -22,11 +22,10 @@ pipeline {
             steps {
                 echo "B===>"
                 // 构建 Docker 镜像
-                sh 'docker build -t $DOCKER_IMAGE .'
-                // script {
-                //     // 如果 Jenkinsfile 与 Dockerfile 在同一目录下
-                    
-                // }
+                script {
+                    // 如果 Jenkinsfile 与 Dockerfile 在同一目录下
+                    sh 'docker build -t $DOCKER_IMAGE .'
+                }
             }
         }
 
