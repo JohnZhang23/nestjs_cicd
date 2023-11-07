@@ -14,7 +14,7 @@ pipeline {
             steps {
                 echo "A===>"
                 // 从 GitHub 克隆代码
-                git 'https://github.com/JohnZhang23/nestjs_cicd.git' // 替换为你的仓库地址
+                git clone 'https://github.com/JohnZhang23/nestjs_cicd.git' // 替换为你的仓库地址
             }
         }
 
