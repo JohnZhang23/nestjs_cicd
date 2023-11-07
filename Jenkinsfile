@@ -8,7 +8,8 @@ pipeline {
             steps {
                 echo "A===>"
                 script {
-                    docker.build("nestjs-app")
+                    // 此处调用 Docker Pipeline 插件提供的 'docker' 命令
+                    sh 'docker build -t nestjs-app .'
                 }
             }
         }
@@ -17,12 +18,14 @@ pipeline {
             steps {
                 echo "B===>"
                 script {
-                    docker.run("-d --name nestjs-app-instance nestjs-app")
+                    // 此处调用 Docker Pipeline 插件提供的 'docker' 命令
+                    sh 'docker run -d --name nestjs-app-instance nestjs-app'
                 }
             }
         }
     }
 }
+
 
 
 // pipeline {
