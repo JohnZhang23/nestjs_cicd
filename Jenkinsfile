@@ -16,18 +16,7 @@ pipeline {
             }
         }
 
-        // stage('Build image') {
-        //     steps {
-                
-        //         // 构建 Docker 镜像
-        //         // 进入到 git 代码文件夹 (补全代码)
-        //         // 然后执行和 Jenkinsfile 同级文件 Dockerfile 构建Docker镜像 (补全代码)
-        //          // 构建 Docker 镜像
-        //         script {
-        //             docker.build env.DOCKER_IMAGE
-        //         }
-        //     }
-        // }
+
 
         stage('Build Docker image') {
             steps {
