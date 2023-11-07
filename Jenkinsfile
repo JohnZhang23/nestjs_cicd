@@ -17,29 +17,43 @@ pipeline {
             }
         }
 
-        stage('Build image') {
+        // stage('Build image') {
+        //     steps {
+                
+        //         // 构建 Docker 镜像
+        //         // 进入到 git 代码文件夹 (补全代码)
+        //         // 然后执行和 Jenkinsfile 同级文件 Dockerfile 构建Docker镜像 (补全代码)
+        //          // 构建 Docker 镜像
+        //         script {
+        //             docker.build env.DOCKER_IMAGE
+        //         }
+        //     }
+        // }
+
+        stage('Build Docker image') {
             steps {
                 echo "B===>"
                 // 构建 Docker 镜像
                 script {
-                    docker.build(env.DOCKER_IMAGE)
+                    // 如果 Jenkinsfile 与 Dockerfile 在同一目录下
+                    sh 'docker build -t $DOCKER_IMAGE .'
                 }
             }
         }
 
-        stage('Deploy to EC2') {
+         stage('Run Docker container') {
             steps {
                 echo "C===>"
-                script {
-                    // // 假设你已经在 Jenkins 的 SSH credentials 中设置了 EC2 实例的 SSH 密钥
-                    // // 连接到 EC2 实例并运行 Docker 容器
-                    // sshagent(['ec2-ssh-key']) { // 替换为 Jenkins 中存储的 SSH Key 的 ID
-                    //     sh "ssh -o StrictHostKeyChecking=no ec2-user@your-ec2-public-dns 'docker pull $DOCKER_IMAGE && docker run -d --name nestjs-app --rm -p 3000:3000 $DOCKER_IMAGE'" // 替换为你的 EC2 用户名和公有 DNS
-                    // }
-
-                    sh "docker pull $DOCKER_IMAGE && docker run -d --name nestjs-app --rm -p 3000:3000 $DOCKER_IMAGE" // 替换为你的 EC2 用户名和公有 DNS
-                }
+                // 运行 Docker 容器
+                // script {
+                //     // 停止旧的容器（如果存在）
+                //     sh 'docker stop my-nestjs-app || true'
+                //     sh 'docker rm my-nestjs-app || true'
+                //     // 运行新的容器
+                //     sh 'docker run -d --name my-nestjs-app -p 3000:3000 $DOCKER_IMAGE'
+                // }
             }
         }
+
     }
 }
